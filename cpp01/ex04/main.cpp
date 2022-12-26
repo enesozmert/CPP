@@ -54,14 +54,24 @@ int main(int argc, char **argv)
   int i;
   int j;
 
+  i = 0;
+  j = 0;
   if (checkArgException(argc) == -1)
     return (-1);
-
   filename = argv[1];
   filename_replace = filename;
   filename_replace.append(".replace");
-
   s1 = argv[2];
   s2 = argv[3];
-  readFile(*)
+  readFile(readStream, filename);
+  readFileException(readStream);
+  while (!readStream.eof())
+  {
+    if (j == 0)
+      readStream >> std::noskipws >> c;
+    else
+      j = 0;
+    if (readStream.eof())
+      break;
+  }
 }
