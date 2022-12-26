@@ -1,0 +1,22 @@
+{
+	"a": {
+        "scope": "a",
+        "prefix": "a",
+        "body": [
+            "class Zombie",
+            "{",
+            "\tprivate:",
+            "\t\tstd::string name;",
+            "\tpublic:",
+            "\t\tZombie();",
+            "\t\t~Zombie();",
+            "\t\tvoid announce( void );",
+            "\t\tstd::string getName();",
+            "\t\tvoid setName(std::string name);",
+            "\t};",
+            "\tZombie\t*zombieHorde( int N , std::string name );",
+            "#endif"
+        ],
+        "description": "a"
+    }
+}
