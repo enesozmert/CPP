@@ -51,6 +51,8 @@ int main(int argc, char **argv)
   std::fstream writeStream;
   std::string s1;
   std::string s2;
+  std::string aux;
+  char c;
   int i;
   int j;
 
@@ -73,5 +75,29 @@ int main(int argc, char **argv)
       j = 0;
     if (readStream.eof())
       break;
+    if (c == s1.c_str()[0])
+    {
+      aux = "";
+      aux.append(1, c);
+      i = 1;
+      while (i < (int)s1.length() && !readStream.eof())
+      {
+        readStream >> std::noskipws >> c;
+        if (c != s1.c_str()[i])
+        {
+          j = 1;
+          break;
+        }
+        aux.append(1, c);
+        i++;
+        std::cout << i << std::endl;
+      }
+      if (i == (int)s1.length())
+        writeStream << s2;
+      else
+        writeStream << aux;
+    }
+    else
+      writeStream << c;
   }
 }
