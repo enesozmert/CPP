@@ -6,12 +6,12 @@
 #    By: eozmert <eozmert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 13:28:24 by eozmert           #+#    #+#              #
-#    Updated: 2023/01/02 19:53:16 by eozmert          ###   ########.fr        #
+#    Updated: 2023/01/02 16:43:07 by eozmert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = clapTrap
-FILES = main.cpp ClapTrap.cpp
+NAME = fixed
+FILES = main.cpp Fixed.cpp Point.cpp bsp.cpp
 
 OBJECTS = $(FILES:.cpp=.o)
 

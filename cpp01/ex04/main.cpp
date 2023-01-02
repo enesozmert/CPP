@@ -67,6 +67,8 @@ int main(int argc, char **argv)
   s2 = argv[3];
   readFile(readStream, filename);
   readFileException(readStream);
+  writeFile(writeStream, filename_replace);
+  writeFileException(writeStream);
   while (!readStream.eof())
   {
     if (j == 0)
@@ -90,7 +92,6 @@ int main(int argc, char **argv)
         }
         aux.append(1, c);
         i++;
-        std::cout << i << std::endl;
       }
       if (i == (int)s1.length())
         writeStream << s2;
