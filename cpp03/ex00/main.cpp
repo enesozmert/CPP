@@ -1,18 +1,31 @@
 #include "ClapTrap.hpp"
+#define SIZE 52
 
-int	main()
+int	main(void)
 {
-	ClapTrap john("John Doe");
-	ClapTrap chuck("Chuck Norris");
-	ClapTrap foreign;
-	foreign = chuck;
+	{
+		std::cout << "--------------------------------" << std::endl;
+		std::cout << "----testing member functions----" << std::endl;
+		std::cout << "--------------------------------" << std::endl;
+		ClapTrap clapTrap1("name1");
+		ClapTrap clapTrap2;
 
-	john.attack("Chuck Norris");
-	chuck.takeDamage(0);
-	chuck.takeDamage(132);
-	chuck.attack("Me");
-	chuck.beRepaired(2);
-	chuck.takeDamage(10);
-	foreign.attack("John Doe");
-	return 0;
+
+		clapTrap2 = clapTrap1;
+		clapTrap2.setAttackDamage(5);
+		clapTrap2.attack("enemy1");
+		clapTrap2.takeDamage(1);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.beRepaired(10);
+		clapTrap2.takeDamage(1);
+	}
+	return (0);
 }

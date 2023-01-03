@@ -6,12 +6,12 @@
 #    By: eozmert <eozmert@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/21 13:28:24 by eozmert           #+#    #+#              #
-#    Updated: 2023/01/03 13:38:35 by eozmert          ###   ########.fr        #
+#    Updated: 2023/01/03 14:50:44 by eozmert          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = scavTrap
-FILES = main.cpp ClapTrap.cpp ScavTrap.cpp
+NAME = diamondTrap
+FILES = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 OBJECTS = $(FILES:.cpp=.o)
 
