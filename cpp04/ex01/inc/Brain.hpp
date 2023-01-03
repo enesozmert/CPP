@@ -11,12 +11,11 @@
 # include <string>
 # include <iostream>
 # include <iomanip>
-# include "Brain.hpp"
 # include "RandomString.hpp"
 
 class Brain
 {
-    protected:
+    protected: 
 		std::string	_ideas[100];
     public:
 		Brain();
