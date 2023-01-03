@@ -2,12 +2,12 @@
 
 Cat::Cat() : Animal("Cat")
 {
-    _brain = new Brain();
+    this->printIdeas();
+    this->_brain = new Brain();
 }
 
-Cat::Cat(const Cat &cat) : Animal("Cat")
+Cat::Cat(const Cat &cat) : Animal("Cat"), _brain(new Brain(*(cat._brain)))
 {
-    _brain = new Brain(*cat._brain);
     *this = cat;
 }
 
@@ -18,7 +18,8 @@ void Cat::makeSound() const
 
 void Cat::printIdeas() const
 {
-    std::cout << "miyav" << std::endl;
+    this->_brain->printFirstIdeas();
+	std::cout << " at " << &this->_brain << std::endl;
 }
 
 Cat	&Cat::operator=(const Cat &cat)

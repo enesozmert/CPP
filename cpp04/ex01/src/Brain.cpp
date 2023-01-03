@@ -6,6 +6,7 @@ Brain::Brain()
     RandomString rndStr(5);
 
     i = -1;
+    std::cout << rndStr.getText() << std::endl;
     while (++i < 100)
         _ideas[i] = rndStr.getText();
 }
@@ -16,6 +17,7 @@ Brain::Brain(const Brain &brain)
     RandomString rndStr(5);
 
     i = -1;
+    std::cout << rndStr.getText() << std::endl;
     while (++i < 100)
         _ideas[i] = rndStr.getText();
     *this = brain;

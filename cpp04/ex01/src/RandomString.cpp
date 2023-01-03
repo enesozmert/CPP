@@ -26,7 +26,7 @@ std::string RandomString::run(int size)
     std::string randomStr = "";
 
     for (int i = 0; i < size; i++)
-        randomStr += alphaNum[(std::rand() * ltm->tm_sec % alphaNum.size()) % alphaNum.size()];
+        randomStr += alphaNum[(std::rand() * ltm->tm_sec % alphaNum.size())  % alphaNum.size()];
     return (randomStr);
 }
 

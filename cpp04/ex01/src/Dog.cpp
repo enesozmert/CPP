@@ -2,12 +2,12 @@
 
 Dog::Dog() : Animal("Dog")
 {
-    _brain = new Brain();
+    this->printIdeas();
+    this->_brain = new Brain();
 }
 
-Dog::Dog(const Dog &dog) : Animal("Dog")
+Dog::Dog(const Dog &dog) : Animal("Dog"), _brain(new Brain(*(dog._brain)))
 {
-    _brain = new Brain(*dog._brain);
     *this = dog;
 }
 
@@ -18,7 +18,8 @@ void Dog::makeSound() const
 
 void Dog::printIdeas() const
 {
-    std::cout << "miyav" << std::endl;
+    this->_brain->printFirstIdeas();
+	std::cout << " at " << &this->_brain << std::endl;
 }
 
 Dog	&Dog::operator=(const Dog &dog)

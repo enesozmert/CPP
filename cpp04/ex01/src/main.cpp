@@ -1,6 +1,7 @@
 #include <iomanip>
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "RandomString.hpp"
 
 static void	printTitle(std::string title)
 {
@@ -24,38 +25,38 @@ static void	printTitle(std::string title)
 	std::cout << std::setfill('=') << std::setw(size) << "" << std::endl;
 }
 
-static void	testLeaks(void)
-{
-	printTitle("LEAKS");
-	const Animal	*dog = new Dog();
-	const Animal	*cat = new Cat();
+// static void	testLeaks(void)
+// {
+// 	printTitle("LEAKS");
+// 	const Animal	*dog = new Dog();
+// 	const Animal	*cat = new Cat();
 
-	delete dog;
-	delete cat;
-}
+// 	delete dog;
+// 	delete cat;
+// }
 
-static void	testDeepCopy(void)
-{
-	printTitle("DEEP COPY");
-	Dog	dog1;
-	Dog	dog2;
+// static void	testDeepCopy(void)
+// {
+// 	printTitle("DEEP COPY");
+// 	Dog	dog1;
+// 	Dog	dog2;
 
-	dog1.printIdeas();
-	dog2.printIdeas();
+// 	dog1.printIdeas();
+// 	dog2.printIdeas();
 
-	dog2 = dog1;
-	std::cout << std::endl << "After assignation :" << std::endl;
-	dog1.printIdeas();
-	dog2.printIdeas();
+// 	dog2 = dog1;
+// 	std::cout << std::endl << "After assignation :" << std::endl;
+// 	dog1.printIdeas();
+// 	dog2.printIdeas();
 
-	std::cout << std::endl;
+// 	std::cout << std::endl;
 
-	Cat	cat1;
-	Cat	cat2(cat1);
+// 	Cat	cat1;
+// 	Cat	cat2(cat1);
 
-	cat1.printIdeas();
-	cat2.printIdeas();
-}
+// 	cat1.printIdeas();
+// 	cat2.printIdeas();
+// }
 
 static void	testSubject(int size)
 {
@@ -74,9 +75,8 @@ static void	testSubject(int size)
 
 int	main(void)
 {
-	srand((unsigned int)time(NULL));
 	testSubject(5);
-	testLeaks();
-	testDeepCopy();
+	// testLeaks();
+	// testDeepCopy();
 	return (0);
 }
