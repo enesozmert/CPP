@@ -1,12 +1,12 @@
 #include "Cat.hpp"
 
-Cat::Cat() : Animal("Cat")
+Cat::Cat() : AAnimal("Cat")
 {
     this->_brain = new Brain();
     this->printIdeas();
 }
 
-Cat::Cat(const Cat &cat) : Animal("Cat"), _brain(new Brain(*(cat._brain)))
+Cat::Cat(const Cat &cat) : AAnimal("Cat"), _brain(new Brain(*(cat._brain)))
 {
     *this = cat;
 }

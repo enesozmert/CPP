@@ -4,8 +4,8 @@
 
 static void	testLeaks(void)
 {
-	const Animal	*dog = new Dog();
-	const Animal	*cat = new Cat();
+	const AAnimal	*dog = new Dog();
+	const AAnimal	*cat = new Cat();
 
 	delete dog;
 	delete cat;
@@ -35,7 +35,7 @@ static void	testDeepCopy(void)
 
 static void	testSubject(int size)
 {
-	Animal	*arrayAnimals[2 * size];
+	AAnimal	*arrayAnimals[2 * size];
 
 	for (int i = 0; i < size; i++)
 	{

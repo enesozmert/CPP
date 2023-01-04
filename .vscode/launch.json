@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/cpp00/ex01/phoneBook",
+            "program": "${workspaceFolder}/cpp04/ex01/brain",
             "args": [],
             "cwd": "${workspaceFolder}"
         }

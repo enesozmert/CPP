@@ -1,13 +1,13 @@
 #include "Dog.hpp"
 #include "Brain.hpp"
 
-Dog::Dog() : Animal("Dog")
+Dog::Dog() : AAnimal("Dog")
 {
     this->_brain = new Brain();
     this->printIdeas();
 }
 
-Dog::Dog(const Dog &dog) : Animal("Dog"), _brain(new Brain(*(dog._brain)))
+Dog::Dog(const Dog &dog) : AAnimal("Dog"), _brain(new Brain(*(dog._brain)))
 {
     *this = dog;
 }
