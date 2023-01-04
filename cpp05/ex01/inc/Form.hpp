@@ -4,6 +4,8 @@
 # include <iostream>
 # include <iomanip>
 
+class Bureaucrat;
+
 class Form
 {
     private:
@@ -17,7 +19,7 @@ class Form
         Form(const Form &form);
         void GradeTooLowException();
         void GradeTooHighException();
-        void Form::checkGradeSignHighOrLow(int gradeSign);
+        void Form::checkGradeSignHighOrLow(int gradeSign); 
         void Form::checkGradeExecHighOrLow(int gradeExec);
         void beSigned(const Bureaucrat &bureaucrat);
         const std::string getName(void) const;
