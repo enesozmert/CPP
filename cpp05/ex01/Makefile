@@ -1,5 +1,5 @@
 #Definition
-NAME        	=   abstract
+NAME        	=   form
 CC				=	c++
 USER_NAME1		=	eozmert
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -g -I
@@ -11,8 +11,8 @@ INC_DIR			= 	inc/
 OBJ_DIR			=	obj/
 
 #Files
-SRC_FILE		= 	AAnimal Cat Dog WrongAnimal WrongCat Brain RandomString main
-INC_FILE		= 	AAnimal Cat Dog WrongAnimal WrongCat Brain RandomString
+SRC_FILE		= 	Bureaucrat main
+INC_FILE		= 	Bureaucrat
 
 #FileCreate
 SRC 			+= 	$(addprefix $(MAIN_DIR), $(addsuffix .cpp, $(MAIN_FILE)))
