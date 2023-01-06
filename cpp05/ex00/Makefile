@@ -11,8 +11,8 @@ INC_DIR			= 	inc/
 OBJ_DIR			=	obj/
 
 #Files
-SRC_FILE		= 	Bureaucrat main
-INC_FILE		= 	Bureaucrat
+SRC_FILE		= 	Bureaucrat CustomException main
+INC_FILE		= 	Bureaucrat CustomException
 
 #FileCreate
 SRC 			+= 	$(addprefix $(MAIN_DIR), $(addsuffix .cpp, $(MAIN_FILE)))

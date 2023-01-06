@@ -1,14 +1,14 @@
 #include "Form.hpp"
 
-Form::Form() : _name("none"), _gradeSign(150), _gradeExec(150), _isSigned(false)
+Form::Form() : _name("none"), _isSigned(false), _gradeSign(150), _gradeExec(150)
 {
 }
 
 Form::Form(const std::string name, int gradeSign, int gradeExec) :
-	_name(name), _gradeSign(gradeSign), _gradeExec(gradeExec), _isSigned(false)
+	_name(name),_isSigned(false), _gradeSign(gradeSign), _gradeExec(gradeExec)
 {
-    checkGradeExecHighOrLow(gradeExec);
     checkGradeSignHighOrLow(gradeSign);
+    checkGradeExecHighOrLow(gradeExec);
 }
 
 Form::Form(const Form &form)
@@ -16,53 +16,30 @@ Form::Form(const Form &form)
     *this = form;
 }
 
-void Form::GradeTooHighException()
-{
-    std::string result = "Bureaucrat ";
-
-    result.append(__func__);
-    throw std::invalid_argument(result);
-}
-
-void Form::GradeTooLowException()
-{
-    std::string result = "Bureaucrat ";
-
-    result.append(__func__);
-    throw std::invalid_argument(result);
-}
-
 void Form::checkGradeSignHighOrLow(int gradeSign)
 {
     if (gradeSign < 1)
-        GradeTooLowException();
+        CustomException::GradeTooLowException();
     else if (gradeSign > 150)
-        GradeTooHighException();
+        CustomException::GradeTooHighException();
 }
 
 void Form::checkGradeExecHighOrLow(int gradeExec)
 {
     if (gradeExec < 1)
-        GradeTooLowException();
+        CustomException::GradeTooLowException();
     else if (gradeExec > 150)
-        GradeTooHighException();
+        CustomException::GradeTooHighException();
 }
 
-void	Form::beSigned(const Bureaucrat &bureaucrat)
-{
-	if (bureaucrat.getGrade() > _gradeSign)
-		GradeTooLowException();
-	_isSigned = true;
-}
-
-const std::string   Form::getName(void) const
+const std::string Form::getName(void) const
 {
 	return (_name);
 }
 
 int		Form::getGradeSign(void) const
 {
-	return (this->_gradeSign);
+	return (_gradeSign);
 }
 
 int		Form::getGradeExec(void) const
@@ -72,7 +49,14 @@ int		Form::getGradeExec(void) const
 
 bool	Form::getSigned(void) const
 {
-	return (_signed);
+	return (_isSigned);
+}
+
+void Form::beSigned(const Bureaucrat &bureaucrat)
+{
+	if (bureaucrat.getGrade() > _gradeSign)
+		throw CustomException::GradeTooLowException();
+	_isSigned = true;
 }
 
 std::ostream &operator<<(std::ostream &ostream, const Form &form)
@@ -85,14 +69,12 @@ std::ostream &operator<<(std::ostream &ostream, const Form &form)
 }
 
 
-Form &operator=(const Form &form)
+Form &Form::operator=(const Form &form)
 {
-    if (this == *form)
+    if (this == &form)
         return (*this);
-    _signed = form._signed;
+    _isSigned = form._isSigned;
     return (*this);
 }
 
-Form::~Form()
-{
-}
+Form::~Form(){}

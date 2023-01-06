@@ -1,8 +1,19 @@
 #pragma once
 
+# define RED "\x1B[31m"
+# define GREEN "\x1B[32m"
+# define YELLOW "\x1B[33m"
+# define ORANGE "\x1B[34m"
+# define PURPLE "\x1B[35m"
+# define BLUE "\x1B[36m"
+# define END "\033[0m"
+
 # include <string>
 # include <iostream>
 # include <iomanip>
+# include "CustomException.hpp"
+
+class CustomExcepiton;
 
 class Bureaucrat
 {
@@ -17,8 +28,6 @@ class Bureaucrat
         int getGrade() const;
         void upGrade();
         void downGrade();
-        void GradeTooHighException();
-        void GradeTooLowException();
         void checkGradeHighOrLow(int grade);
         Bureaucrat	&operator=(const Bureaucrat &bureaucrat);
         ~Bureaucrat();

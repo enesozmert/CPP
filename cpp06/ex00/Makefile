@@ -1,5 +1,5 @@
 #Definition
-NAME        	=   form
+NAME        	=   bureaucrat
 CC				=	c++
 USER_NAME1		=	eozmert
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -g -I
@@ -11,8 +11,8 @@ INC_DIR			= 	inc/
 OBJ_DIR			=	obj/
 
 #Files
-SRC_FILE		= 	Bureaucrat Form main
-INC_FILE		= 	Bureaucrat Form
+SRC_FILE		= 	Convert main
+INC_FILE		= 	Convert
 
 #FileCreate
 SRC 			+= 	$(addprefix $(MAIN_DIR), $(addsuffix .cpp, $(MAIN_FILE)))

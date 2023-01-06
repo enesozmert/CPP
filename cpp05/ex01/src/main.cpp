@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "CustomException.hpp"
 #include "Form.hpp"
 
 int	main(void)
@@ -10,10 +11,9 @@ int	main(void)
 	std::cout << bob << std::endl;
 	
 	bob.signForm(f);
-	bob.upGrade();
+	// bob.upGrade();
 	bob.signForm(f);
 
 	std::cout << std::endl << f << std::endl;
-
 	return (0);
 }

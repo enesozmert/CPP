@@ -1,6 +1,5 @@
 #pragma once
 
-
 # define RED "\x1B[31m"
 # define GREEN "\x1B[32m"
 # define YELLOW "\x1B[33m"
@@ -12,10 +11,10 @@
 # include <string>
 # include <iostream>
 # include <iomanip>
-# include "Form.hpp"
+# include "AForm.hpp"
 # include "CustomException.hpp"
 
-class Form;
+class AForm;
 class CustomException;
 
 class Bureaucrat
@@ -27,12 +26,13 @@ class Bureaucrat
         Bureaucrat();
         Bureaucrat(const std::string name, int grade);
         Bureaucrat(const Bureaucrat &bureaucrat);
+        void checkGradeHighOrLow(int grade);
         const std::string getName(void) const;
         int getGrade() const;
         void upGrade();
         void downGrade();
-        void checkGradeHighOrLow(int grade);
-        void signForm(Form &form) const;
+        void signForm(AForm &form) const;
+		void executeForm(const AForm &form) const;
         Bureaucrat	&operator=(const Bureaucrat &bureaucrat);
         ~Bureaucrat();
 };

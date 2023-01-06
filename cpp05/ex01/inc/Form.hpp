@@ -3,6 +3,7 @@
 # include <string>
 # include <iostream>
 # include <iomanip>
+# include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
@@ -17,15 +18,15 @@ class Form
         Form();
         Form(const std::string name, int gradeSign, int gradeExec);
         Form(const Form &form);
-        void GradeTooLowException();
-        void GradeTooHighException();
-        void Form::checkGradeSignHighOrLow(int gradeSign); 
-        void Form::checkGradeExecHighOrLow(int gradeExec);
-        void beSigned(const Bureaucrat &bureaucrat);
+        void checkGradeSignHighOrLow(int gradeSign); 
+        void checkGradeExecHighOrLow(int gradeExec);
         const std::string getName(void) const;
-        int getSigned(void) const;
+        int	getGradeSign(void) const;
+        int	getGradeExec(void) const;
+        bool getSigned(void) const;
         int gradeSign(void) const;
         int gradeExec(void) const;
+        void beSigned(const Bureaucrat &bureaucrat);
         Form &operator=(const Form &form);
         ~Form();
 };

@@ -37,28 +37,12 @@ void Bureaucrat::downGrade()
     this->_grade++;
 }
 
-void Bureaucrat::GradeTooHighException()
-{
-    std::string result = "Bureaucrat ";
-
-    result.append(__func__);
-    throw std::invalid_argument(result);
-}
-
-void Bureaucrat::GradeTooLowException()
-{
-    std::string result = "Bureaucrat ";
-
-    result.append(__func__);
-    throw std::invalid_argument(result);
-}
-
 void Bureaucrat::checkGradeHighOrLow(int grade)
 {
     if (grade < 1)
-        GradeTooLowException();
+        throw CustomException::GradeTooLowException();
     else if (grade > 150)
-        GradeTooHighException();
+        throw CustomException::GradeTooHighException();
 }
 
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &bureaucrat)
