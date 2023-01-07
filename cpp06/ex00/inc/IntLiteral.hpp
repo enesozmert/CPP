@@ -1,22 +1,22 @@
 #pragma once
 
-# include <string>
-# include <iostream>
-# include <iomanip>
 # include "ALiteral.hpp"
 
 class IntLiteral: public ALiteral
 {
     private:
-        int _num;
+        int _intValue;
     public:
         IntLiteral();
+        IntLiteral(const char * value);
         IntLiteral(const IntLiteral &intLiteral);
-        const int getNum() const;
-        void setNum(int num);
-        bool getResult() const;
-        void run(ALiteral const &literal);
+        int getIntValue() const;
+        void setIntValue(int intValue);
+        bool getOutOfRange() const;
+        void convert();
+        void checkOutOfRange();
+        bool checkType();
+        void print(std::ostream &o) const;
         IntLiteral &operator=(const IntLiteral &intLiteral);
         ~IntLiteral();
 };
-std::ostream &operator<<(std::ostream &ostream, const IntLiteral &intLiteral);

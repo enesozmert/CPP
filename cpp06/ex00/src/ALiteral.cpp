@@ -1,11 +1,17 @@
 #include "ALiteral.hpp"
 
-ALiteral::ALiteral()
+ALiteral::ALiteral(): _value(""), _isType(false), _isOutOfRange(false), _isLimit(false), _isConvert(false)
 {
 }
-ALiteral::ALiteral(const ALiteral &Literal)
+
+ALiteral::ALiteral(const char *value) :_value(value), _isType(false) , _isOutOfRange(false), _isLimit(false), _isConvert(false)
 {
 
+}
+
+ALiteral::ALiteral(const ALiteral &literal)
+{
+    *this = literal;
 }
 
 ALiteral &ALiteral::operator=(const ALiteral &literal)
@@ -15,7 +21,7 @@ ALiteral &ALiteral::operator=(const ALiteral &literal)
     return (*this);
 }
 
-~ALiteral()
+ALiteral::~ALiteral()
 {
     
 }

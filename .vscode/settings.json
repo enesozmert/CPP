@@ -69,6 +69,8 @@
         "fixed.hpp": "c",
         "__functional_03": "cpp",
         "memory_resource": "cpp",
-        "filesystem": "cpp"
+        "filesystem": "cpp",
+        "cerrno": "cpp",
+        "__memory": "cpp"
     }
 }

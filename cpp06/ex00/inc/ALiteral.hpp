@@ -3,17 +3,28 @@
 # include <string>
 # include <iostream>
 # include <iomanip>
+# include <cstdlib>
+# include <cerrno>
+# include <limits>
+# include <cstring>
 
 class ALiteral
 {
     private:
+        virtual void checkOutOfRange() = 0;
+        virtual bool checkType() = 0;
+    protected:
+        const char *_value;
     public:
-        bool result;
+        bool _isType;
+        bool _isOutOfRange;
+        bool _isLimit;
+        bool _isConvert;
         ALiteral();
+        ALiteral(const char *value);
         ALiteral(const ALiteral &literal);
-        virtual bool getResult() const = 0;
-        virtual void run(ALiteral const &literal) = 0;
+        virtual void convert() = 0;
         ALiteral &operator=(const ALiteral &literal);
-        ~ALiteral();
+        virtual ~ALiteral();
 };
 
