@@ -11,8 +11,8 @@ INC_DIR			= 	inc/
 OBJ_DIR			=	obj/
 
 #Files
-SRC_FILE		= 	ALiteral IntLiteral PseudoLiteral Convert main
-INC_FILE		= 	ALiteral IntLiteral PseudoLiteral Convert
+SRC_FILE		= 	ALiteral IntLiteral FloatLiteral DoubleLiteral CharLiteral PseudoLiteral Convert main
+INC_FILE		= 	ALiteral IntLiteral FloatLiteral DoubleLiteral CharLiteral PseudoLiteral Convert
 
 #FileCreate
 SRC 			+= 	$(addprefix $(MAIN_DIR), $(addsuffix .cpp, $(MAIN_FILE)))

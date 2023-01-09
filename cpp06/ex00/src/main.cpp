@@ -1,6 +1,12 @@
 #include "Convert.hpp"
 
-int main()
+int main(int ac, char *av[])
 {
-    Convert convert("a");
+    if (ac != 2)
+	{
+		std::cout << "Use ./convert litteralValue" << std::endl;
+		return (1);
+	}
+	Convert	conv(av[1]);
+	std::cout << conv;
 }

@@ -56,10 +56,14 @@ void IntLiteral::convert()
 {
     if (_isOutOfRange)
         return;
+    _intValue = atoi(_value);
+    _floatValue = static_cast<float>(_intValue);
+    _doubleValue = static_cast<double>(_intValue);
     if (isalpha(_value[0]) && strlen(_value) == 1)
-        _intValue = static_cast<int>(_value[0]);
-    else if (_isType)
-        _intValue = atoi(_value);
+    {
+        _intValue = static_cast<char>(_value[0]);
+        _charValue = static_cast<char>(_intValue);
+    }
     _isConvert = true;
 }
 
@@ -79,6 +83,14 @@ IntLiteral &IntLiteral::operator=(const IntLiteral &intLiteral)
     if (this == &intLiteral)
         return (*this);
     _intValue = intLiteral._intValue;
+    _floatValue = intLiteral._floatValue;
+    _doubleValue = intLiteral._doubleValue;
+    _charValue = intLiteral._charValue;
+    _isConvert = intLiteral._isConvert;
+    _isLimit = intLiteral._isLimit;
+    _isOutOfRange = intLiteral._isOutOfRange;
+    _isType = intLiteral._isType;
+    _value = intLiteral._value;
     return (*this);
 }
 

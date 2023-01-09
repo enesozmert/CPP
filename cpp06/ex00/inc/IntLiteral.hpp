@@ -5,7 +5,7 @@
 class IntLiteral: public ALiteral
 {
     private:
-        int _intValue;
+        
     public:
         IntLiteral();
         IntLiteral(const char * value);

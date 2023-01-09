@@ -5,7 +5,6 @@
 class DoubleLiteral: public ALiteral
 {
     private:
-        int _doubleValue;
     public:
         DoubleLiteral();
         DoubleLiteral(const char * value);

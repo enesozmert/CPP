@@ -48,7 +48,7 @@ bool FloatLiteral::checkType()
 
     i = 0;
     _isType = false;
-    while (_value[i] && (_value[i] >= '0' && _value[i] <= '9') || _value[i] == '.')
+    while (_value[i] && ((_value[i] >= '0' && _value[i] <= '9') || _value[i] == '.'))
     {
         if (_value[0] == '.' || _value[strlen(_value) - 1] == '.')
             _isType = false;
@@ -62,26 +62,53 @@ bool FloatLiteral::checkType()
     return (_isType);
 }
 
+void	FloatLiteral::print(std::ostream &o) const
+{
+	o << "float: ";
+	if (!_isConvert)
+	{
+		o << "impossible" << std::endl;
+		return ;
+	}
+	// if (_isLimit)
+	// 	o << "f" << std::endl;
+	// else
+	// {
+		o.precision(1);
+		o << std::fixed << _floatValue << "f" << std::endl;
+	// }
+}
+
 void FloatLiteral::convert()
 {
-    int intValue;
+    char	*end = NULL;
 
     if (_isOutOfRange)
         return;
+    _floatValue =  std::strtof(_value, &end);
+    _doubleValue = static_cast<double>(_floatValue);
+    _intValue = static_cast<int>(_floatValue);
     if (isalpha(_value[0]) && strlen(_value) == 1)
     {
-        intValue = atoi(_value);
-        _floatValue = static_cast<int>(intValue);
+        _floatValue = static_cast<char>(_value[0]);
+        _charValue = static_cast<char>(_intValue);
     }
-    else if (_isType)
-        _floatValue = static_cast<float>(_floatValue);
+    _isConvert = true;
 }
 
 FloatLiteral &FloatLiteral::operator=(const FloatLiteral &floatLiteral)
 {
     if (this == &floatLiteral)
         return (*this);
+    _intValue = floatLiteral._intValue;
     _floatValue = floatLiteral._floatValue;
+    _doubleValue = floatLiteral._doubleValue;
+    _charValue = floatLiteral._charValue;
+    _isConvert = floatLiteral._isConvert;
+    _isLimit = floatLiteral._isLimit;
+    _isOutOfRange = floatLiteral._isOutOfRange;
+    _isType = floatLiteral._isType;
+    _value = floatLiteral._value;
     return (*this);
 }
 

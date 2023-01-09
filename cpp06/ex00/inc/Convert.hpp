@@ -21,7 +21,7 @@ class Convert
         void selectType();
         bool convertToInt();
         bool convertToFloat();
-        bool convertToDecimal();
+        bool convertToDouble();
         bool convertToChar();
     public:
         Convert();
@@ -30,6 +30,10 @@ class Convert
         Convert &operator=(const Convert &convert);
         const char * getValue();
         ~Convert();
+        IntLiteral intLi;
+        FloatLiteral floatLi;
+        DoubleLiteral doubleLi;
+        CharLiteral charLi;
 };
-std::ostream &operator<<(std::ostream &ostream, const Convert &convert);
+std::ostream &operator<<(std::ostream &ostream, Convert &convert);
 

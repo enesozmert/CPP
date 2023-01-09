@@ -48,7 +48,7 @@ bool DoubleLiteral::checkType()
 
     i = 0;
     _isType = false;
-    while (_value[i] && (_value[i] >= '0' && _value[i] <= '9') || _value[i] == '.')
+    while (_value[i] && _value[i] >= '0' && (_value[i] <= '9' || _value[i] == '.'))
     {
         if (_value[0] == '.' || _value[strlen(_value) - 1] == '.')
             _isType = false;
@@ -60,24 +60,44 @@ bool DoubleLiteral::checkType()
 
 void DoubleLiteral::convert()
 {
-    int intValue;
-
+    char	*end = NULL;
     if (_isOutOfRange)
         return;
+    _doubleValue =  std::strtod(_value, &end);
+    _floatValue = static_cast<double>(_doubleValue);
     if (isalpha(_value[0]) && strlen(_value) == 1)
     {
-        intValue = atoi(_value);
-        _doubleValue = static_cast<int>(intValue);
+        _doubleValue = static_cast<char>(_value[0]);
+        _charValue = static_cast<char>(_intValue);
     }
-    else if (_isType)
-        _doubleValue = static_cast<double>(_doubleValue);
+    _isConvert = true;
+}
+
+void	DoubleLiteral::print(std::ostream &o) const
+{
+	o << "double: ";
+	if (!_isConvert)
+	{
+		o << "impossible" << std::endl;
+		return ;
+	}
+		o.precision(1);
+		o << std::fixed << _doubleValue << std::endl;
 }
 
 DoubleLiteral &DoubleLiteral::operator=(const DoubleLiteral &doubleLiteral)
 {
     if (this == &doubleLiteral)
         return (*this);
+    _intValue = doubleLiteral._intValue;
+    _floatValue = doubleLiteral._floatValue;
     _doubleValue = doubleLiteral._doubleValue;
+    _charValue = doubleLiteral._charValue;
+    _isConvert = doubleLiteral._isConvert;
+    _isLimit = doubleLiteral._isLimit;
+    _isOutOfRange = doubleLiteral._isOutOfRange;
+    _isType = doubleLiteral._isType;
+    _value = doubleLiteral._value;
     return (*this);
 }
 

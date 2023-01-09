@@ -14,7 +14,12 @@ class ALiteral
         virtual void checkOutOfRange() = 0;
         virtual bool checkType() = 0;
     protected:
+        virtual void print(std::ostream &o) const = 0;
         const char *_value;
+        int _intValue;
+        float _floatValue;
+        double _doubleValue;
+        char _charValue;
     public:
         bool _isType;
         bool _isOutOfRange;

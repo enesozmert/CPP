@@ -5,7 +5,6 @@
 class FloatLiteral: public ALiteral
 {
     private:
-        int _floatValue;
     public:
         FloatLiteral();
         FloatLiteral(const char * value);
