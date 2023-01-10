@@ -64,8 +64,7 @@ void DoubleLiteral::convert()
     if (_isOutOfRange)
         return;
     _doubleValue =  std::strtod(_value, &end);
-    _floatValue = static_cast<double>(_doubleValue);
-    if (isalpha(_value[0]) && strlen(_value) == 1)
+    if (isascii(_value[0]) && strlen(_value) == 1)
     {
         _doubleValue = static_cast<char>(_value[0]);
         _charValue = static_cast<char>(_intValue);

@@ -51,12 +51,14 @@ bool CharLiteral::checkType()
 
 void CharLiteral::convert()
 {
+    char	*end = NULL;
     if (_isOutOfRange)
         return;
-	_doubleValue = static_cast<double>(_charValue);
-    _charValue = static_cast<char>(_doubleValue);
-    _intValue = static_cast<int>(_charValue);
-	_floatValue = static_cast<float>(_charValue);
+    _doubleValue =  std::strtod(_value, &end);
+    if (isascii(_value[0]) && strlen(_value) == 1)
+	    _charValue = _value[0];
+    else
+        _charValue = static_cast<double>(_doubleValue);
     _isConvert = true;
 }
 

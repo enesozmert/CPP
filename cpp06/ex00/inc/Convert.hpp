@@ -19,10 +19,10 @@ class Convert
     private:
         const char * _value;
         void selectType();
-        bool convertToInt();
-        bool convertToFloat();
-        bool convertToDouble();
-        bool convertToChar();
+        void convertToInt();
+        void convertToFloat();
+        void convertToDouble();
+        void convertToChar();
     public:
         Convert();
         Convert(const char *value);

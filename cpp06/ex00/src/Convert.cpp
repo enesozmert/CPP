@@ -1,6 +1,7 @@
 #include "Convert.hpp"
 
-typedef bool (Convert::*select_type)();
+typedef void (Convert::*convert_type)();
+typedef void (ALiteral::*get_type)();
 
 Convert::Convert() : _value("")
 {
@@ -21,52 +22,48 @@ Convert::Convert(const Convert &convert)
     selectType();
 }
 
-bool Convert::convertToInt()
+void Convert::convertToInt()
 {
     IntLiteral intLiteral(_value);
 
     intLiteral.convert();
     intLi = intLiteral;
-    return (intLiteral._isType);
 }
 
-bool Convert::convertToFloat()
+void Convert::convertToFloat()
 {
     FloatLiteral floatLiteral(_value);
 
     floatLiteral.convert();
     floatLi = floatLiteral;
-    return (floatLiteral._isType);
 }
 
-bool Convert::convertToDouble()
+void Convert::convertToDouble()
 {
     DoubleLiteral doubleLiteral(_value);
 
     doubleLiteral.convert();
     doubleLi = doubleLiteral;
-    return (doubleLiteral._isType);
 }
 
-bool Convert::convertToChar()
+void Convert::convertToChar()
 {
     CharLiteral charLiteral(_value);
 
     charLiteral.convert();
     charLi = charLiteral;
-    return (charLiteral._isType);
 }
 
 void Convert::selectType()
 {
     int i;
-    int result;
 
     i = -1;
-    select_type p[4] = {&Convert::convertToInt,&Convert::convertToFloat,&Convert::convertToDouble,&Convert::convertToChar};
+    convert_type select_types[4] = {&Convert::convertToInt,&Convert::convertToFloat,&Convert::convertToDouble,&Convert::convertToChar};
+    get_type get_types[4] = {&IntLiteral::checkType,&IntLiteral::checkType,&IntLiteral::checkType,&IntLiteral::checkType};
     while (++i < 4)
     {
-        result = (this->*p[i])();
+        (this->*select_types[i])();
     }
 }
 

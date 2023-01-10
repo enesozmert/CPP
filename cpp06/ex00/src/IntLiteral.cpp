@@ -59,7 +59,7 @@ void IntLiteral::convert()
     _intValue = atoi(_value);
     _floatValue = static_cast<float>(_intValue);
     _doubleValue = static_cast<double>(_intValue);
-    if (isalpha(_value[0]) && strlen(_value) == 1)
+    if (isascii(_value[0]) && strlen(_value) == 1)
     {
         _intValue = static_cast<char>(_value[0]);
         _charValue = static_cast<char>(_intValue);

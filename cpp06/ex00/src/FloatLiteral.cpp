@@ -86,9 +86,7 @@ void FloatLiteral::convert()
     if (_isOutOfRange)
         return;
     _floatValue =  std::strtof(_value, &end);
-    _doubleValue = static_cast<double>(_floatValue);
-    _intValue = static_cast<int>(_floatValue);
-    if (isalpha(_value[0]) && strlen(_value) == 1)
+    if (isascii(_value[0]) && strlen(_value) == 1)
     {
         _floatValue = static_cast<char>(_value[0]);
         _charValue = static_cast<char>(_intValue);
