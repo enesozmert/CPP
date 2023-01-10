@@ -46,7 +46,7 @@ bool CharLiteral::checkType()
     _isType = false;
     if (isascii(_value[0]) && strlen(_value) == 1)
         _isType = true;
-    return (_isType);
+    return (false);
 }
 
 void CharLiteral::convert()
@@ -73,7 +73,7 @@ void	CharLiteral::print(std::ostream &o) const
 	if (_charValue > 31 && _charValue < 127)
 		o << "'" << _charValue << "'" << std::endl;
 	else
-		o << "non displayable" << std::endl;
+		o << "Non displayable" << std::endl;
 }
 
 CharLiteral &CharLiteral::operator=(const CharLiteral &charLiteral)
@@ -85,9 +85,11 @@ CharLiteral &CharLiteral::operator=(const CharLiteral &charLiteral)
     _doubleValue = charLiteral._doubleValue;
     _charValue = charLiteral._charValue;
     _isConvert = charLiteral._isConvert;
-    _isLimit = charLiteral._isLimit;
     _isOutOfRange = charLiteral._isOutOfRange;
+    _isStringError = charLiteral._isStringError;
     _isType = charLiteral._isType;
+    _limit = charLiteral._limit;
+    _isLimit = charLiteral._isLimit;
     _value = charLiteral._value;
     return (*this);
 }

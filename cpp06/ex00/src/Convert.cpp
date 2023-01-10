@@ -1,7 +1,6 @@
 #include "Convert.hpp"
 
-typedef void (Convert::*convert_type)();
-typedef void (ALiteral::*get_type)();
+typedef void (Convert::*createLiteral)();
 
 Convert::Convert() : _value("")
 {
@@ -9,10 +8,6 @@ Convert::Convert() : _value("")
 
 Convert::Convert(const char *value) : _value(value)
 {
-    // IntLiteral intLiteral(_value);
-
-    // intLiteral.convert();
-    // std::cout << intLiteral.getIntValue() << std::endl;
     selectType();
 }
 
@@ -22,11 +17,34 @@ Convert::Convert(const Convert &convert)
     selectType();
 }
 
+void Convert::convertAll(ALiteral *literal)
+{
+    if (literal->checkType())
+    {
+        std::cout << "Error: invalid type" << std::endl;
+        exit(0) ;
+    }
+    else
+    {
+        literal->checkOutOfRange();
+        literal->convert();
+    }
+    if (literal->_isOutOfRange)
+    {
+        std::cout << "Error: values out of range" << std::endl;
+        exit(0) ;
+    }
+    if (literal->_isStringError)
+    {
+        std::cout << "Error: string format error" << std::endl;
+        exit(0) ;
+    }
+}
+
 void Convert::convertToInt()
 {
     IntLiteral intLiteral(_value);
 
-    intLiteral.convert();
     intLi = intLiteral;
 }
 
@@ -34,7 +52,6 @@ void Convert::convertToFloat()
 {
     FloatLiteral floatLiteral(_value);
 
-    floatLiteral.convert();
     floatLi = floatLiteral;
 }
 
@@ -42,7 +59,6 @@ void Convert::convertToDouble()
 {
     DoubleLiteral doubleLiteral(_value);
 
-    doubleLiteral.convert();
     doubleLi = doubleLiteral;
 }
 
@@ -50,8 +66,14 @@ void Convert::convertToChar()
 {
     CharLiteral charLiteral(_value);
 
-    charLiteral.convert();
     charLi = charLiteral;
+}
+
+void Convert::convertToPseudo()
+{
+    PseudoLiteral pseudoLiteral(_value);
+
+    pseudoLi = pseudoLiteral;
 }
 
 void Convert::selectType()
@@ -59,12 +81,16 @@ void Convert::selectType()
     int i;
 
     i = -1;
-    convert_type select_types[4] = {&Convert::convertToInt,&Convert::convertToFloat,&Convert::convertToDouble,&Convert::convertToChar};
-    get_type get_types[4] = {&IntLiteral::checkType,&IntLiteral::checkType,&IntLiteral::checkType,&IntLiteral::checkType};
+    createLiteral createLiterals[4] = {&Convert::convertToInt,&Convert::convertToFloat,&Convert::convertToDouble,&Convert::convertToChar};
     while (++i < 4)
     {
-        (this->*select_types[i])();
+        (this->*createLiterals[i])();
     }
+    convertAll(&intLi);
+    convertAll(&floatLi);
+    convertAll(&doubleLi);
+    convertAll(&charLi);
+    convertAll(&pseudoLi);
 }
 
 const char * Convert::getValue()

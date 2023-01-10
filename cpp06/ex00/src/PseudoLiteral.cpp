@@ -1,8 +1,13 @@
 #include "PseudoLiteral.hpp"
 
-PseudoLiteral::PseudoLiteral()
+PseudoLiteral::PseudoLiteral(): ALiteral("")
 {
 }
+
+PseudoLiteral::PseudoLiteral(const char * value) : ALiteral(value)
+{
+}
+
 
 PseudoLiteral::PseudoLiteral(const PseudoLiteral &pseudoLiteral)
 {
@@ -24,10 +29,11 @@ void PseudoLiteral::checkOutOfRange()
 	{
 		if (_value == _limits[i] || _value == (_limits[i] + "f"))
 		{
+            _isLimit = true;
 			_limit = _limits[i];
 			if (i == 1)
 				_limit = _limits[0];
-			_isLimit = true;
+			_isConvert = true;
 		}
 	}
 	_isLimit = false;
@@ -43,27 +49,17 @@ bool PseudoLiteral::checkType()
     return (false);
 }
 
+void	PseudoLiteral::print(std::ostream &o) const
+{
+    (void)o;
+}
+
 PseudoLiteral &PseudoLiteral::operator=(const PseudoLiteral &pseudoLiteral)
 {
     if (this == &pseudoLiteral)
         return (*this);
     _limit = pseudoLiteral._limit;
     return (*this);
-}
-
-std::ostream &operator<<(std::ostream &ostream, const PseudoLiteral &pseudoLiteral)
-{
-    (void)pseudoLiteral;
-    // if (_isOutOfRange)
-	// 	ostream << "Error: values out of range" << std::endl;
-    // ostream << "int: ";
-    // if (!_isOutOfRange)
-    // {
-    //     ostream << "impossible" << std::endl;
-    //     return;
-    // }
-    // ostream << _intValue << std::endl;
-    return (ostream);
 }
 
 PseudoLiteral::~PseudoLiteral()

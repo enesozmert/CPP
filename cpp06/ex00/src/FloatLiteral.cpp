@@ -35,7 +35,7 @@ void FloatLiteral::checkOutOfRange()
 	char	*end;
 
 	doubleValue = std::strtod(_value, &end);
-    if (*_value != '\0' || errno != 0) {std::abort(); }
+    // if (*_value != '\0' || errno != 0) {std::abort(); }
     if (doubleValue < -std::numeric_limits<float>::max() || doubleValue > std::numeric_limits<float>::max())
         _isOutOfRange = true;
     else
@@ -47,18 +47,18 @@ bool FloatLiteral::checkType()
     int i;
 
     i = 0;
-    _isType = false;
+    _isType = true;
     while (_value[i] && ((_value[i] >= '0' && _value[i] <= '9') || _value[i] == '.'))
     {
         if (_value[0] == '.' || _value[strlen(_value) - 1] == '.')
-            _isType = false;
-        _isType = true;
+            _isType = true;
+        _isType = false;
         i++;
     }
     if (_value[i] == 'f')
-        _isType = true;
-    else
         _isType = false;
+    else
+        _isType = true;
     return (_isType);
 }
 
@@ -70,13 +70,13 @@ void	FloatLiteral::print(std::ostream &o) const
 		o << "impossible" << std::endl;
 		return ;
 	}
-	// if (_isLimit)
-	// 	o << "f" << std::endl;
-	// else
-	// {
+	if (_isLimit)
+		o << _limit + "f" << std::endl;
+	else
+	{
 		o.precision(1);
 		o << std::fixed << _floatValue << "f" << std::endl;
-	// }
+	}
 }
 
 void FloatLiteral::convert()
@@ -85,11 +85,16 @@ void FloatLiteral::convert()
 
     if (_isOutOfRange)
         return;
-    _floatValue =  std::strtof(_value, &end);
+    _floatValue = std::strtof(_value, &end);
+	if (errno == ERANGE)
+	{
+		_isOutOfRange = true;
+		return ;
+	}
     if (isascii(_value[0]) && strlen(_value) == 1)
     {
         _floatValue = static_cast<char>(_value[0]);
-        _charValue = static_cast<char>(_intValue);
+        _charValue = static_cast<char>(_floatValue);
     }
     _isConvert = true;
 }
@@ -103,9 +108,11 @@ FloatLiteral &FloatLiteral::operator=(const FloatLiteral &floatLiteral)
     _doubleValue = floatLiteral._doubleValue;
     _charValue = floatLiteral._charValue;
     _isConvert = floatLiteral._isConvert;
-    _isLimit = floatLiteral._isLimit;
     _isOutOfRange = floatLiteral._isOutOfRange;
+    _isStringError = floatLiteral._isStringError;
     _isType = floatLiteral._isType;
+    _limit = floatLiteral._limit;
+    _isLimit = floatLiteral._isLimit;
     _value = floatLiteral._value;
     return (*this);
 }

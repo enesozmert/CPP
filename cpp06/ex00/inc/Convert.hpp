@@ -19,21 +19,27 @@ class Convert
     private:
         const char * _value;
         void selectType();
+
+        void convertAll(ALiteral *literal);
+
         void convertToInt();
         void convertToFloat();
         void convertToDouble();
         void convertToChar();
+        void convertToPseudo();
+
     public:
+        IntLiteral intLi;
+        FloatLiteral floatLi;
+        DoubleLiteral doubleLi;
+        CharLiteral charLi;
+        PseudoLiteral pseudoLi;
         Convert();
         Convert(const char *value);
         Convert(const Convert &convert);
         Convert &operator=(const Convert &convert);
         const char * getValue();
         ~Convert();
-        IntLiteral intLi;
-        FloatLiteral floatLi;
-        DoubleLiteral doubleLi;
-        CharLiteral charLi;
 };
 std::ostream &operator<<(std::ostream &ostream, Convert &convert);
 

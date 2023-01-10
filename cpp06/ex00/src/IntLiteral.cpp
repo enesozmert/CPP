@@ -40,15 +40,12 @@ bool IntLiteral::checkType()
 {
     int i;
 
-    i = 0;
-    _isType = false;
-    while (_value[i] && _value[i] >= '0' && _value[i] <= '9')
+    i = -1;
+    _isType = true;
+    while (_value[++i] && _value[i] >= '0' && _value[i] <= '9')
     {
-        _isType = true;
-        i++;
+        _isType = false;
     }
-    if (isalpha(_value[0]) && strlen(_value) == 1)
-        _isType = true;
     return (_isType);
 }
 
@@ -57,9 +54,7 @@ void IntLiteral::convert()
     if (_isOutOfRange)
         return;
     _intValue = atoi(_value);
-    _floatValue = static_cast<float>(_intValue);
-    _doubleValue = static_cast<double>(_intValue);
-    if (isascii(_value[0]) && strlen(_value) == 1)
+    if (isascii(_value[0]) && strlen(_value) == 1 && !isdigit(_value[0]))
     {
         _intValue = static_cast<char>(_value[0]);
         _charValue = static_cast<char>(_intValue);
@@ -87,9 +82,11 @@ IntLiteral &IntLiteral::operator=(const IntLiteral &intLiteral)
     _doubleValue = intLiteral._doubleValue;
     _charValue = intLiteral._charValue;
     _isConvert = intLiteral._isConvert;
-    _isLimit = intLiteral._isLimit;
     _isOutOfRange = intLiteral._isOutOfRange;
+    _isStringError = intLiteral._isStringError;
     _isType = intLiteral._isType;
+    _limit = intLiteral._limit;
+    _isLimit = intLiteral._isLimit;
     _value = intLiteral._value;
     return (*this);
 }

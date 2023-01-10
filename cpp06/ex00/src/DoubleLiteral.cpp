@@ -35,7 +35,6 @@ void DoubleLiteral::checkOutOfRange()
 	char	*end;
 
 	doubleValue = std::strtold(_value, &end);
-    if (*_value != '\0' || errno != 0) {std::abort(); }
     if (doubleValue < -std::numeric_limits<double>::max() || doubleValue > std::numeric_limits<double>::max())
         _isOutOfRange = true;
     else
@@ -55,7 +54,7 @@ bool DoubleLiteral::checkType()
         _isType = true;
         i++;
     }
-    return (_isType);
+    return (false);
 }
 
 void DoubleLiteral::convert()
@@ -64,6 +63,11 @@ void DoubleLiteral::convert()
     if (_isOutOfRange)
         return;
     _doubleValue =  std::strtod(_value, &end);
+	if (errno == ERANGE)
+	{
+		_isOutOfRange = true;
+		return ;
+	}
     if (isascii(_value[0]) && strlen(_value) == 1)
     {
         _doubleValue = static_cast<char>(_value[0]);
@@ -80,8 +84,13 @@ void	DoubleLiteral::print(std::ostream &o) const
 		o << "impossible" << std::endl;
 		return ;
 	}
+	if (_isLimit)
+		o << _limit << std::endl;
+	else
+	{
 		o.precision(1);
 		o << std::fixed << _doubleValue << std::endl;
+	}
 }
 
 DoubleLiteral &DoubleLiteral::operator=(const DoubleLiteral &doubleLiteral)
@@ -93,9 +102,11 @@ DoubleLiteral &DoubleLiteral::operator=(const DoubleLiteral &doubleLiteral)
     _doubleValue = doubleLiteral._doubleValue;
     _charValue = doubleLiteral._charValue;
     _isConvert = doubleLiteral._isConvert;
-    _isLimit = doubleLiteral._isLimit;
     _isOutOfRange = doubleLiteral._isOutOfRange;
+    _isStringError = doubleLiteral._isStringError;
     _isType = doubleLiteral._isType;
+    _limit = doubleLiteral._limit;
+    _isLimit = doubleLiteral._isLimit;
     _value = doubleLiteral._value;
     return (*this);
 }
