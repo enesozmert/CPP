@@ -7,6 +7,7 @@ int main(int ac, char *av[])
 		std::cout << "Use ./convert litteralValue" << std::endl;
 		return (1);
 	}
-	Convert	conv(av[1]);
-	std::cout << conv;
+	Convert	convert(av[1]);
+
+	std::cout << convert;
 }

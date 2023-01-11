@@ -1,45 +1,41 @@
 #pragma once
 
-# define RED "\x1B[31m"
-# define GREEN "\x1B[32m"
-# define YELLOW "\x1B[33m"
-# define ORANGE "\x1B[34m"
-# define PURPLE "\x1B[35m"
-# define BLUE "\x1B[36m"
-# define END "\033[0m"
-
-# include "IntLiteral.hpp"
-# include "FloatLiteral.hpp"
-# include "DoubleLiteral.hpp"
-# include "CharLiteral.hpp"
-# include "PseudoLiteral.hpp"
+#include <exception>
+#include <string>
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
+#include <cerrno>
+#include <limits>
+#include <cstring>
+#include <math.h>
 
 class Convert
 {
-    private:
-        const char * _value;
-        void selectType();
-
-        void convertAll(ALiteral *literal);
-
-        void convertToInt();
-        void convertToFloat();
-        void convertToDouble();
-        void convertToChar();
-        void convertToPseudo();
-
     public:
-        IntLiteral intLi;
-        FloatLiteral floatLi;
-        DoubleLiteral doubleLi;
-        CharLiteral charLi;
-        PseudoLiteral pseudoLi;
-        Convert();
-        Convert(const char *value);
-        Convert(const Convert &convert);
-        Convert &operator=(const Convert &convert);
-        const char * getValue();
-        ~Convert();
-};
-std::ostream &operator<<(std::ostream &ostream, Convert &convert);
+        Convert(const char *number);
+        Convert(const Convert &scalarString);
+        virtual ~Convert();
 
+        Convert &operator=(const Convert &scalarString);
+        operator int() const;
+        operator char() const;
+        operator float() const;
+        operator double() const;
+
+        class ImpossibleException : public std::exception
+        {
+        public:
+            const char *what() const throw();
+        };
+        class NonDisplayableException : public std::exception
+        {
+        public:
+            const char *what() const throw();
+        };
+
+    private:
+        Convert();
+        std::string number;
+};
+std::ostream &operator<<(std::ostream &ostream, const Convert &convert);

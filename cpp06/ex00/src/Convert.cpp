@@ -1,120 +1,113 @@
 #include "Convert.hpp"
 
-typedef void (Convert::*createLiteral)();
-
-Convert::Convert() : _value("")
+Convert::Convert()
 {
 }
 
-Convert::Convert(const char *value) : _value(value)
+Convert::Convert(const char *s) : number(static_cast<std::string>(s))
 {
-    selectType();
 }
 
 Convert::Convert(const Convert &convert)
 {
     *this = convert;
-    selectType();
-}
-
-void Convert::convertAll(ALiteral *literal)
-{
-    if (literal->checkType())
-    {
-        std::cout << "Error: invalid type" << std::endl;
-        exit(0) ;
-    }
-    else
-    {
-        literal->checkOutOfRange();
-        literal->convert();
-    }
-    if (literal->_isOutOfRange)
-    {
-        std::cout << "Error: values out of range" << std::endl;
-        exit(0) ;
-    }
-    if (literal->_isStringError)
-    {
-        std::cout << "Error: string format error" << std::endl;
-        exit(0) ;
-    }
-}
-
-void Convert::convertToInt()
-{
-    IntLiteral intLiteral(_value);
-
-    intLi = intLiteral;
-}
-
-void Convert::convertToFloat()
-{
-    FloatLiteral floatLiteral(_value);
-
-    floatLi = floatLiteral;
-}
-
-void Convert::convertToDouble()
-{
-    DoubleLiteral doubleLiteral(_value);
-
-    doubleLi = doubleLiteral;
-}
-
-void Convert::convertToChar()
-{
-    CharLiteral charLiteral(_value);
-
-    charLi = charLiteral;
-}
-
-void Convert::convertToPseudo()
-{
-    PseudoLiteral pseudoLiteral(_value);
-
-    pseudoLi = pseudoLiteral;
-}
-
-void Convert::selectType()
-{
-    int i;
-
-    i = -1;
-    createLiteral createLiterals[4] = {&Convert::convertToInt,&Convert::convertToFloat,&Convert::convertToDouble,&Convert::convertToChar};
-    while (++i < 4)
-    {
-        (this->*createLiterals[i])();
-    }
-    convertAll(&intLi);
-    convertAll(&floatLi);
-    convertAll(&doubleLi);
-    convertAll(&charLi);
-    convertAll(&pseudoLi);
-}
-
-const char * Convert::getValue()
-{
-    return (_value);
-}
-
-Convert &Convert::operator=(const Convert &convert)
-{
-    if (this == &convert)
-        return (*this);
-    _value = convert._value;
-    return (*this);
-}
-
-std::ostream &operator<<(std::ostream &ostream, Convert &convert)
-{
-    convert.intLi.print(ostream);
-    convert.floatLi.print(ostream);
-    convert.doubleLi.print(ostream);
-    convert.charLi.print(ostream);
-    return (ostream);
 }
 
 Convert::~Convert()
 {
+}
+
+Convert &Convert::operator=(const Convert &convert)
+{
+    number = convert.number;
+    return *this;
+}
+
+Convert::operator int() const
+{
+    double n = static_cast<double>(*this);
+    if (isnan(n) ||
+        !(std::numeric_limits<int>::min() <= n && n <= std::numeric_limits<int>::max()))
+        throw ImpossibleException();
+    return static_cast<int>(n);
+}
+
+Convert::operator char() const
+{
+    int n = static_cast<int>(*this);
+    if (!(std::numeric_limits<char>::min() <= n && n <= std::numeric_limits<char>::max()))
+        throw ImpossibleException();
+    if (!(32 <= n && n <= 126))
+        throw NonDisplayableException();
+    return static_cast<char>(n);
+}
+
+Convert::operator float() const
+{
+    double n = static_cast<double>(*this);
+    return static_cast<float>(n);
+}
+
+Convert::operator double() const
+{
+    char *end;
+    double n = std::strtod(number.c_str(), &end);
+    if (number.c_str() == end)
+        throw ImpossibleException();
+    return n;
+}
+
+const char *Convert::ImpossibleException::what() const throw()
+{
+    return "imposible";
+}
+
+const char *Convert::NonDisplayableException::what() const throw()
+{
+    return "Non displayable";
+}
+
+std::ostream &operator<<(std::ostream &ostream, const Convert &convert)
+{
+    try
+    {
+        char c = static_cast<char>(convert);
+        ostream << "char : '" << c << "'\n";
+    }
+    catch (const std::exception &e)
+    {
+        ostream << "char : " << e.what() << '\n';
+    }
+
+    try
+    {
+        int i = static_cast<int>(convert);
+        ostream << "int : " << i << "\n";
+    }
+    catch (const std::exception &e)
+    {
+        ostream << "int : " << e.what() << '\n';
+    }
+
+    ostream << std::setprecision(1) << std::fixed;
+    try
+    {
+        float f = static_cast<float>(convert);
+        ostream << "float : " << f << "f\n";
+    }
+    catch (const std::exception &e)
+    {
+        ostream << "float : " << e.what() << "\n";
+    }
+
+    try
+    {
+        double d = static_cast<double>(convert);
+        ostream << "double : " << d << "\n";
+    }
+    catch (const std::exception &e)
+    {
+        ostream << "double : " << e.what() << "\n";
+    }
+    return (ostream);
 }

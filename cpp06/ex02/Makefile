@@ -1,5 +1,5 @@
 #Definition
-NAME        	=   convert
+NAME        	=   base
 CC				=	c++
 USER_NAME1		=	eozmert
 CFLAGS			=	-Wall -Wextra -Werror -std=c++98 -g -I
@@ -11,8 +11,8 @@ INC_DIR			= 	inc/
 OBJ_DIR			=	obj/
 
 #Files
-SRC_FILE		= 	Convert main
-INC_FILE		= 	Convert
+SRC_FILE		= 	Base main
+INC_FILE		= 	A B C Base
 
 #FileCreate
 SRC 			+= 	$(addprefix $(MAIN_DIR), $(addsuffix .cpp, $(MAIN_FILE)))
